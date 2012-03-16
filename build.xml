@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="PluginCore.makejar" default="makejar" basedir=".">
+	<target name ="makejar" description="Create a JAR output file">
+		<jar destfile="${basedir}\PluginCore.jar">
+			<fileset dir="bin" includes="**/*.class"/>
+		</jar>
+	</target>
+</project>
+
