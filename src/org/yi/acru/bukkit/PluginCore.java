@@ -36,6 +36,7 @@ import com.nijikokun.register.payment.Methods;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.platymuus.bukkit.permissions.Group;
 import de.bananaco.bpermissions.api.WorldManager;
 import net.sacredlabyrinth.phaed.simpleclans.Clan;
@@ -563,7 +564,7 @@ public abstract class PluginCore extends JavaPlugin{
 			// Permissions classic last.
 			if(linkPermissions.isEnabled()){
 				if(permissionsWorld) result = linkPermissions.getPermissionHandler().inGroup(world.getName(), playerName, groupName.substring(1, end));
-				else result = linkPermissions.getPermissionHandler().inGroup(playerName, groupName.substring(1, end));
+				else result = linkPermissions.getPermissionHandler().inGroup(player.getWorld().getName(), playerName, groupName.substring(1, end));
 				if(result) return(true);
 			}
 		}
@@ -618,7 +619,7 @@ public abstract class PluginCore extends JavaPlugin{
 		if(!usingExternalZones()) return(true);
 		
 		if(linkTowny.isEnabled()){
-			if(linkTowny.getTowny().getTownyUniverse().isWilderness(block)){
+			if(TownyUniverse.isWilderness(block)){
 				if(usingExternalPermissions()){
 					if(!hasPermission(block.getWorld(), player, "lockette.towny.wilds")){
 						lastZoneDeny = "towny.wilds";
