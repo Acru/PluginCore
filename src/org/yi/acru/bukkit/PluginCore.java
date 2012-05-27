@@ -456,7 +456,7 @@ public abstract class PluginCore extends JavaPlugin{
 	public boolean inGroup(World world, String playerName, String groupName){
 		return(inGroup(world, getServer().getPlayer(playerName), playerName, groupName));
 	}
-	@SuppressWarnings("deprecation")
+
 	private boolean inGroup(World world, Player player, String playerName, String groupName){
 		// Built in groups.
 		String		local;
@@ -519,7 +519,7 @@ public abstract class PluginCore extends JavaPlugin{
 			
 			if(linkTowny.isEnabled()){
 				try{
-					Resident	resident = linkTowny.getTowny().getTownyUniverse().getResident(playerName);
+					Resident	resident = TownyUniverse.getDataSource().getResident(playerName);
 					
 					try{
 						Town		town = resident.getTown();
