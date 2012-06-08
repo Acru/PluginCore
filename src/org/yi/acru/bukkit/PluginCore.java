@@ -33,6 +33,7 @@ import com.griefcraft.model.Protection;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.register.payment.Method.MethodAccount;
 import com.nijikokun.register.payment.Methods;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
@@ -619,16 +620,21 @@ public abstract class PluginCore extends JavaPlugin{
 		if(!usingExternalZones()) return(true);
 		
 		if(linkTowny.isEnabled()){
-			if(TownyUniverse.isWilderness(block)){
-				if(usingExternalPermissions()){
-					if(!hasPermission(block.getWorld(), player, "lockette.towny.wilds")){
-						lastZoneDeny = "towny.wilds";
-						return(false);
+			try {
+				if (TownyUniverse.getDataSource().getWorld(block.getWorld().getName()).isUsingTowny())
+					if(TownyUniverse.isWilderness(block)){
+						if(usingExternalPermissions()){
+							if(!hasPermission(block.getWorld(), player, "lockette.towny.wilds")){
+								lastZoneDeny = "towny.wilds";
+								return(false);
+							}
+						}
+						else{
+							// Anything needed here?
+						}
 					}
-				}
-				else{
-					// Anything needed here?
-				}
+			} catch (NotRegisteredException e) {
+				// Failed to fetch world from Towny, so ignore
 			}
 		}
 		
