@@ -33,7 +33,6 @@ import com.griefcraft.model.Protection;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.register.payment.Method.MethodAccount;
 import com.nijikokun.register.payment.Methods;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
@@ -633,7 +632,7 @@ public abstract class PluginCore extends JavaPlugin{
 							// Anything needed here?
 						}
 					}
-			} catch (NotRegisteredException e) {
+			} catch (Exception e) {
 				// Failed to fetch world from Towny, so ignore
 			}
 		}
