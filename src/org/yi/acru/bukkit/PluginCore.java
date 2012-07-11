@@ -546,10 +546,10 @@ public abstract class PluginCore extends JavaPlugin{
 			}
 			
 			if(linkMcmmo.isEnabled()) if(player != null){
-				PlayerProfile	pProfile = linkMcmmo.getMcmmo().getPlayerProfile(player);
+				PlayerProfile	pProfile = linkMcmmo.getMcmmo().getPlayerProfile(player.getName());
 				
 				if(pProfile != null) if(pProfile.inParty()){
-					if(pProfile.getParty().equalsIgnoreCase(groupName.substring(1, end))) return(true);
+					if(pProfile.getParty().getName().equalsIgnoreCase(groupName.substring(1, end))) return(true);
 				}
 			}
 			

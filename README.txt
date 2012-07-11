@@ -11,13 +11,13 @@ and needs the following Libraries: (Version used in brackets)
 * Factions (1.6.8)
 * GroupManager (2.0.23)
 * LWC (4.2.0)
-* mcMMO (1.3.08)
+* mcMMO (1.3.09-b945)
 * Permissions (2.5.4)
 * PermissionsBukkit (1.6)
 * PermissionsEx (1.19.2)
 * Register (1.8)
 * SimpleClans (2.3.4)
-* Towny (0.80.1.3)
+* Towny (0.80.1.13)
 
 Included is an Ant build file to package into a single jar library.
 
