@@ -46,7 +46,7 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 
 public abstract class PluginCore extends JavaPlugin{
-	private static final String				coreVersion = "1.3.3";
+	private static final String				coreVersion = "1.3.4";
 	public static final Logger				log = Logger.getLogger("Minecraft");
 	
 	private static boolean					registered = false;
