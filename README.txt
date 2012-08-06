@@ -6,18 +6,18 @@ http://www.opensource.org/licenses/NOSL3.0
 This project is a build requirement for the Lockette project,
 and needs the following Libraries: (Version used in brackets)
 
-* Bukkit (1.2.5-R3.0)
+* Bukkit (1.2.5-R5.0)
 * bPermissions (2.9.4)
 * Factions (1.6.8)
 * GroupManager (2.0.23)
 * LWC (4.2.0)
-* mcMMO (1.3.09-b945)
+* mcMMO (1.3.09)
 * Permissions (2.5.4)
 * PermissionsBukkit (1.6)
 * PermissionsEx (1.19.2)
 * Register (1.8)
 * SimpleClans (2.3.4)
-* Towny (0.80.1.13)
+* Towny (0.81)
 
 Included is an Ant build file to package into a single jar library.
 

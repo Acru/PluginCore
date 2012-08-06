@@ -46,7 +46,7 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 
 public abstract class PluginCore extends JavaPlugin{
-	private static final String				coreVersion = "1.3.4";
+	private static final String				coreVersion = "1.3.5";
 	public static final Logger				log = Logger.getLogger("Minecraft");
 	
 	private static boolean					registered = false;
@@ -171,6 +171,8 @@ public abstract class PluginCore extends JavaPlugin{
 
 	public static String getCoreVersion(){return(coreVersion);}
 	public static String lastZoneDeny(){return(lastZoneDeny);}
+	
+	
 	public void dumpCoreInfo(){
 		log.info("[" + getDescription().getName() + "] Dumping core information:");
 		log.info("Number of linked group plugins: " + useExternalGroups);
@@ -196,13 +198,14 @@ public abstract class PluginCore extends JavaPlugin{
 		else log.info("Superperms is unavailable.");
 	}
 	
+	
 	//********************************************************************************
 	// Start of external plugin linking section.
 	
 	
 	// Returns a special link holder class.
 	private PluginCoreLink linkInternalPerms(){
-		PluginCoreLink	link = new PluginCoreLink(null, LinkType.PERMISSIONS);
+		PluginCoreLink	link = new PluginCoreLink(this, null, LinkType.PERMISSIONS);
 		
 		try{
 			final Class<?>		args[] = {String.class};
@@ -226,7 +229,7 @@ public abstract class PluginCore extends JavaPlugin{
 	// Returns a special link holder class.
 	private PluginCoreLink linkExternalPlugin(String pluginName, LinkType handler){
 		Plugin			plugin = getServer().getPluginManager().getPlugin(pluginName);
-		PluginCoreLink	link = new PluginCoreLink(plugin, handler);
+		PluginCoreLink	link = new PluginCoreLink(this, plugin, handler);
 		
 		// Return if not available.
 		if(plugin == null) return(link);
@@ -441,6 +444,7 @@ public abstract class PluginCore extends JavaPlugin{
 	//********************************************************************************************************************
 	// Start of external permissions section
 	
+	protected boolean pluginEnableOverride(String pluginName){return(false);}
 	protected boolean usingExternalGroups(){return(useExternalGroups > 0);}
 	protected boolean usingExternalPermissions(){return(useExternalPermissions > 0);}
 	protected boolean usingExternalZones(){return(useExternalZones > 0);}

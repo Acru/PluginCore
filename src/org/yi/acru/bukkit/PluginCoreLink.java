@@ -13,6 +13,7 @@ import net.sacredlabyrinth.phaed.simpleclans.SimpleClans;
 import org.anjocaido.groupmanager.GroupManager;
 import org.anjocaido.groupmanager.dataholder.worlds.WorldsHolder;
 import org.bukkit.plugin.Plugin;
+
 import com.gmail.nossr50.mcMMO;
 import com.griefcraft.lwc.LWCPlugin;
 import com.massivecraft.factions.P;
@@ -23,6 +24,8 @@ import com.platymuus.bukkit.permissions.PermissionsPlugin;
 
 
 public class PluginCoreLink{
+	private static PluginCore		plugin;
+	
 	public enum LinkType{
 		NONE, GROUPS, PERMISSIONS, ZONES, ECONOMY,
 		GROUPS_PERMISSIONS, GROUPS_ZONES, PERMISSIONS_ZONES, GROUPS_PERMISSIONS_ZONES,
@@ -33,16 +36,18 @@ public class PluginCoreLink{
 	private boolean		linked, enabled;
 	private LinkType	type;
 	
-	private Plugin		plugin;
+	private Plugin		linkedPlugin;
 	private Object		data;
 	
 	
-	PluginCoreLink(Plugin target, LinkType handler){
+	PluginCoreLink(PluginCore instance, Plugin target, LinkType handler){
+		plugin = instance;
+		
 		linked = false;
 		enabled = false;
 		//found = false;
 		
-		plugin = target;
+		linkedPlugin = target;
 		type = handler;
 		data = null;
 	}
@@ -50,7 +55,12 @@ public class PluginCoreLink{
 	
 	public boolean isLinked(){return(linked);}
 	protected void setLinked(boolean value){linked = value;}
-	public boolean isEnabled(){return(enabled);}
+	
+	public boolean isEnabled(){
+		if(plugin.pluginEnableOverride(getPluginName())) return(false);
+		return(enabled);
+	}
+	
 	protected void setEnabled(boolean value){enabled = value;}
 	public LinkType getType(){return(type);}
 	//protected void setType(LinkType value){type = value;}
@@ -62,23 +72,23 @@ public class PluginCoreLink{
 
 	//public Plugin getPlugin(){return(plugin);}
 	public String getPluginName(){
-		if(plugin == null) return(null);
-		return(plugin.getDescription().getName());
+		if(linkedPlugin == null) return(null);
+		return(linkedPlugin.getDescription().getName());
 	}
 	public String getPluginVersion(){
-		if(plugin == null) return(null);
-		return(plugin.getDescription().getVersion());
+		if(linkedPlugin == null) return(null);
+		return(linkedPlugin.getDescription().getVersion());
 	}
 	//protected void setPlugin(Plugin target){plugin = target;}
 	
-	protected GroupManager getGroupManager(){return((GroupManager) plugin);}
-	protected Permissions getPermissions(){return((Permissions) plugin);}
-	protected PermissionsPlugin getPermsBukkit(){return((PermissionsPlugin) plugin);}
-	protected Towny getTowny(){return((Towny) plugin);}
-	protected SimpleClans getSimpleClans(){return((SimpleClans) plugin);}
-	protected mcMMO getMcmmo(){return((mcMMO) plugin);}
-	protected P getFactions(){return((P) plugin);}
-	protected LWCPlugin getLWCPlugin(){return((LWCPlugin) plugin);}
+	protected GroupManager getGroupManager(){return((GroupManager) linkedPlugin);}
+	protected Permissions getPermissions(){return((Permissions) linkedPlugin);}
+	protected PermissionsPlugin getPermsBukkit(){return((PermissionsPlugin) linkedPlugin);}
+	protected Towny getTowny(){return((Towny) linkedPlugin);}
+	protected SimpleClans getSimpleClans(){return((SimpleClans) linkedPlugin);}
+	protected mcMMO getMcmmo(){return((mcMMO) linkedPlugin);}
+	protected P getFactions(){return((P) linkedPlugin);}
+	protected LWCPlugin getLWCPlugin(){return((LWCPlugin) linkedPlugin);}
 	
 	
 	// Data accessors.
